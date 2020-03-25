@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>完美拖拽自制</title>
+    <style>
+        body,
+        ul,
+        li,
+        p,
+        h2 {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        body {
+            background: rgb(114, 112, 112);
+            height: 1200px;
+            width: 1800px;
+        }
+
+        .block {
+            position: absolute;
+            top: 30px;
+            left:200px ;
+            width: 300px;
+            height: 160px;
+            border: 2px solid #fff;
+            font-size: 0;
+            cursor: move;
+            background: rgb(165, 165, 165);
+            user-select: none;
+        }
+
+        .block h2 {
+            height: 30px;
+            background: rgb(56, 56, 56);
+            text-align: right;
+            line-height: 30px;
+            border-bottom: 2px solid #fff;
+        }
+
+        .block h2 a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 200;
+            line-height: 30px;
+            padding-right: 10px;
+        }
+
+        .block h2 a:hover {
+            color: green;
+        }
+
+        .block p {
+            font-size: 16px;
+            /* height: 30px; */
+            padding: 10px 0 10px 10px;
+            /* line-height: 30px; */
+
+        }
+
+        .block p span {
+            color: rgb(248, 213, 16);
+            padding-left: 10px;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href= "这里是CSS文件路径"> -->
+</head>
+
+<body>
+    <div class="block">
+        
+        <p>Drag:<span id="isDraging">false</span></p>
+        <p>offsetTop:<span>0</span></p>
+        <p>offsetLeft:<span>0</span></p>
+    </div>
+
+    <script src="./dragEle.js"></script>
+    <script>
+        var oBlock = document.getElementsByClassName("block")[0];
+         var oSpan = oBlock.getElementsByTagName("span");
+         var oreplay = document.getElementById("replay");
+         var isDraging=document.getElementById("isDraging");
+
+        var dragEle=new DragEle({
+            ele:oBlock,
+        })
+
+        // 只封装拖拽操作，其余操作在封装外执行
+        document.onmousemove=moveStatus;
+
+        function moveStatus(){
+            isDraging.innerText=dragEle.isDraging
+            oSpan[1].innerHTML = oBlock.offsetTop;
+            oSpan[2].innerHTML = oBlock.offsetLeft
+        }
+
+        
+
+
+
+    </script>
+</body>
+
+</html>
